@@ -6,7 +6,10 @@ from src.pipeline import run_pipeline
 def test_customer_load_and_rerun(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
     Path("config").mkdir(); Path("data/input").mkdir(parents=True)
-    Path("config/customers.yaml").write_text(Path(__file__).parents[1].joinpath("config/customers.yaml").read_text())
+    Path("config/customers.yaml").write_text(
+    (Path(__file__).parent / "config" / "customers.yaml").read_text(encoding="utf-8"),
+    encoding="utf-8"
+)
     with open("data/input/customers.csv","w",newline="") as f:
         w=csv.DictWriter(f,fieldnames=["customer_id","customer_name","email"]); w.writeheader(); w.writerow({"customer_id":1,"customer_name":"A","email":"a@example.com"})
     first=run_pipeline("config/customers.yaml", "test.db")
