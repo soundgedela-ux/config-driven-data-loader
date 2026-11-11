@@ -28,10 +28,5 @@ jobs:
       - name: Check Python files
         run: python -m compileall -q .
 
-      - name: Run tests if available
-        run: |
-          if [ -d tests ]; then
-            pytest -v
-          else
-            echo "No tests directory found"
-          fi
+      -       - name: Run tests
+        run: pytest -v
