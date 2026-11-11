@@ -1,0 +1,17 @@
+name: orders
+source:
+  path: data/input/orders.json
+  format: json
+target:
+  table: orders
+  load_mode: upsert
+schema:
+  order_id: {type: integer, nullable: false}
+  customer_id: {type: integer, nullable: false}
+  amount: {type: number, nullable: false}
+  order_date: {type: datetime, nullable: false}
+keys: [order_id]
+foreign_keys:
+  customer_id: customers.customer_id
+rules:
+  amount_min: 0
