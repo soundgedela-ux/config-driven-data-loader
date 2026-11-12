@@ -1,0 +1,14 @@
+name: customers
+source:
+  path: data/input/customers.csv
+  format: csv
+target:
+  table: customers
+  load_mode: upsert
+schema:
+  customer_id: {type: integer, nullable: false}
+  customer_name: {type: string, nullable: false}
+  email: {type: string, nullable: false}
+keys: [customer_id]
+rules:
+  email: email
